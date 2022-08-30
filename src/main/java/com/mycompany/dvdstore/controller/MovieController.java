@@ -8,6 +8,14 @@ import java.util.Scanner;
 
 public class MovieController {
 
+    public MovieServiceInterface getMovieService() {
+        return movieService;
+    }
+
+    public void setMovieService(MovieServiceInterface movieService) {
+        this.movieService = movieService;
+    }
+
     private MovieServiceInterface movieService;
 
 

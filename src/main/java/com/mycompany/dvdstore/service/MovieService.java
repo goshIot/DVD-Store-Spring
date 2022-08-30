@@ -5,12 +5,19 @@ import com.mycompany.dvdstore.repository.GoLiveMovieRepository;
 import com.mycompany.dvdstore.repository.MovieRepository;
 import com.mycompany.dvdstore.repository.MovieRepositoryInterface;
 
-public class MovieService {
+public class MovieService implements MovieServiceInterface{
 
     private MovieRepositoryInterface movieRepository ;
 
-    public void registerMovie(Movie movie){
+    public MovieRepositoryInterface getMovieRepository() {
+        return movieRepository;
+    }
 
+    public void setMovieRepository(MovieRepositoryInterface movieRepository) {
+        this.movieRepository = movieRepository;
+    }
+
+    public void registerMovie(Movie movie){
         movieRepository.add(movie);
     }
 
