@@ -1,14 +1,15 @@
-package com.mycompany.dvdstore.service;
+package com.mycompany.dvdstore.core.service;
 
-import com.mycompany.dvdstore.entity.Movie;
-import com.mycompany.dvdstore.repository.MovieRepositoryInterface;
+import com.mycompany.dvdstore.core.entity.Movie;
+import com.mycompany.dvdstore.core.repository.MovieRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
-public class DefaultMovieService implements MovieServiceInterface{
+public class DefaultMovieService implements MovieServiceInterface {
 
     private MovieRepositoryInterface movieRepository ;
 
@@ -22,12 +23,17 @@ public class DefaultMovieService implements MovieServiceInterface{
     }
 
     public void registerMovie(Movie movie){
-        movieRepository.add(movie);
+        movieRepository.save(movie);
     }
 
     @Override
-    public List<Movie> getMovieList() {
-        return movieRepository.list();
+    public Iterable<Movie> getMovieList() {
+        return movieRepository.findAll();
+    }
+
+    @Override
+    public Movie getMovieById(long id) {
+        return movieRepository.findById(id).orElseThrow();
     }
 
 
